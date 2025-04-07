@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pelacak Lokasi</title>
+</head>
+<body>
+    <h2>Izinkan Lokasi</h2>
+    <p>Mohon izinkan browser untuk mengakses lokasi Anda.</p>
+
+    <script>
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const data = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+
+            fetch('/location', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => {
+                alert("Lokasi berhasil dikirim!");
+            });
+        }, function(error) {
+            alert("Gagal mendapatkan lokasi: " + error.message);
+        });
+    </script>
+</body>
+</html>
