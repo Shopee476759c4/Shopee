@@ -16,8 +16,10 @@ def location():
 
     print(f"[{time}] Lokasi diterima: Latitude: {lat}, Longitude: {lon}")
 
-    # Cetak ke log saja, karena file tidak persist di render
+    with open("lokasi.txt", "a") as f:
+        f.write(f"{time} - Lat: {lat}, Lon: {lon}\n")
+
     return {"status": "sukses"}
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
